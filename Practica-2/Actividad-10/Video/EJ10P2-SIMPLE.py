@@ -20,12 +20,9 @@ notas_2 = [
     95, 19, 47, 15, 31, 39, 15, 74, 33, 57, 10
     ]
 
-eliminar = (",","'")
+lista_alumnos = nombres.split(",")
 
-for signo in eliminar:
-    nombres = nombres.replace(signo,"")
-
-lista_alumnos = nombres.split()
+lista_alumnos = [alumno.strip("'\n ") for alumno in lista_alumnos]
 
 tupla_notas = zip(notas_1,notas_2)
 
