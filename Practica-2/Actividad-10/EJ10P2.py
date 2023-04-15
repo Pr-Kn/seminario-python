@@ -1,3 +1,30 @@
+def crear_diccionario_alumnos(lista,primera_nota,segunda_nota):
+    tupla_notas = zip(primera_nota,segunda_nota)
+    return dict(zip(lista,tupla_notas))
+
+def promedio(iterable):
+    return sum(iterable) / len(iterable)
+
+def crear_diccionario_promedios(diccionario_alumnos):
+    promedio_alumnos = {}
+    for alumno in diccionario_alumnos:
+        promedio_alumnos[alumno] = promedio(diccionario_alumnos[alumno])
+    return promedio_alumnos
+
+def promedio_del_curso(diccionario_promedios):
+    nota_total = promedio(diccionario_promedios.values())
+    return f"Nota promedio del curso: {nota_total}"
+
+def maximo_promedio(diccionario_promedios):
+    nombre = max(diccionario_promedios,key=diccionario_promedios.get)
+    nota = max(diccionario_promedios.values())
+    return f"Promedio maximo\nAlumno: {nombre}\nNota: {nota}"
+
+def nota_minima(diccionario_alumnos):
+    nombre = min(diccionario_alumnos,key=diccionario_alumnos.get)
+    nota = min(min(diccionario_alumnos.values()))
+    return f"Promedio maximo\nAlumno: {nombre}\nNota: {nota}"
+
 nombres = ''' 
     'Agustin', 'Alan', 'Andrés', 'Ariadna', 'Bautista', 'CAROLINA', 'CESAR',
     'David','Diego', 'Dolores', 'DYLAN', 'ELIANA', 'Emanuel', 'Fabián', 'Facundo',
@@ -24,44 +51,22 @@ lista_alumnos = nombres.split(",")
 
 lista_alumnos = [alumno.strip("'\n ") for alumno in lista_alumnos]
 
-tupla_notas = zip(notas_1,notas_2)
+notas_alumnos = crear_diccionario_alumnos(lista_alumnos,notas_1,notas_2)
 
-notas_alumnos = dict(zip(lista_alumnos,tupla_notas))
+promedio_alumnos = crear_diccionario_promedios(notas_alumnos)
 
-promedio_alumnos = {}
+promedio_total = promedio_del_curso(promedio_alumnos)
 
-promedio_curso = 0
+alumno_maximo = maximo_promedio(promedio_alumnos)
 
-for alumno in lista_alumnos:
-    promedio = sum(notas_alumnos[alumno]) / 2
-    promedio_alumnos[alumno] = promedio
-    promedio_curso += promedio
-
-promedio_curso = promedio_curso / len(lista_alumnos)
-
-maximo = -1
-nombre_maximo = ""
-
-for alumno in promedio_alumnos:
-    if promedio_alumnos[alumno] > maximo:
-        maximo = promedio_alumnos[alumno]
-        nombre_maximo = alumno
-
-minimo = 1000
-nombre_minimo = ""
-
-for alumno in lista_alumnos:
-    nota_minima = min(notas_alumnos[alumno])
-    if nota_minima < minimo:
-        minimo = nota_minima
-        nombre_minimo = alumno
+alumno_minimo = nota_minima(notas_alumnos)
 
 print(notas_alumnos)
 
 print(promedio_alumnos)
 
-print(promedio_curso)
+print(promedio_total)
 
-print(f"Maximo promediol: {maximo} Alumno: {nombre_maximo}")
+print(alumno_maximo)
 
-print(f"Nota minima: {minimo} Alumno: {nombre_minimo}")
+print(alumno_minimo)
