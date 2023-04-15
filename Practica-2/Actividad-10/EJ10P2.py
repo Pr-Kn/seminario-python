@@ -62,6 +62,6 @@ print(promedio_alumnos)
 
 print(promedio_curso)
 
-print(f"Maximo promedio: {maximo} Alumno: {nombre_maximo}")
+print(f"Maximo promediol: {maximo} Alumno: {nombre_maximo}")
 
 print(f"Nota minima: {minimo} Alumno: {nombre_minimo}")
